@@ -6,21 +6,24 @@ import LinkedPagesListApi
 import page
 import PageManager
 import GetIdFromTitle
+import numpy as np
+import time
 
 def calc(word,depth):
 
     targetPage = page.page(GetIdFromTitle.GetId(word))
 
     #n次正方行列の生成(depth >= 0,targetID)
-    pageManager = PageManager.PageManager(int(depth),targetPage.page_id)
-    pageManager.makePagesCollction()
-    matrix = pageManager.MakeMatrix()
+    #pageManager = PageManager.PageManager(int(depth),targetPage.page_id)
+    #pageManager.makePagesCollction()
+    matrix = PageManager.make(int(depth),targetPage.page_id)
 
     #行列の転置
     transposedMatrix = Transpose(matrix)
+    print transposedMatrix
 
     #初期ベクトルの生成
-    pageRankVector = [1 for col in range(len(matrix))]
+    pageRankVector = np.array([1 for col in range(transposedMatrix.shape[0])])
 
     #行列計算のループ
     pageRankVector = operationMatrixMultiple(transposedMatrix,pageRankVector)
@@ -31,19 +34,24 @@ def calc(word,depth):
 
 #転置
 def Transpose(matrix):
-    transposed =  [[0 for col in range(len(matrix))] for row in range(len(matrix))]
+    """transposed =  [[0 for col in range(len(matrix))] for row in range(len(matrix))]
 
     for i in range(0,len(matrix)):
         for j in range(0,len(matrix)):
             transposed[i][j] = matrix[j][i]
     return transposed
+    """
+    return np.transpose(matrix)
 
 #行列演算
 def operationMatrixMultiple(transposedMatrix,pageRankVector):
-    for i in range(0,3):
+    t = time.time()
+    for i in range(0,5):
 
-        newPageRank = [0 for j in range(len(transposedMatrix))]
-
+        #newPageRank = [0 for j in range(len(transposedMatrix))]
+        newPageRank = transposedMatrix.dot(pageRankVector)
+        newPageRank = 0.15 + newPageRank * 0.85
+        """
         for n in range(0,len(transposedMatrix)):
 
             for k in range(0,len(transposedMatrix)):
@@ -51,7 +59,8 @@ def operationMatrixMultiple(transposedMatrix,pageRankVector):
                 newPageRank[n] += pageRankVector[n]*transposedMatrix[n][k]
 
             newPageRank[n] = 0.15 + 0.85 * newPageRank[n]
-
+        """
         pageRankVector = newPageRank
+    print time.time() - t
 
     return pageRankVector

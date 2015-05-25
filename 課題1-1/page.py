@@ -2,13 +2,14 @@
 import GetTitleFromIdApi
 import LinkTargetAmountApi
 import LinkedPagesListApi
+import numpy as np
 
 class page():
 
     page_id = 0
     page_title = ""
     number_of_target_links = 0.0
-    link_page_ids = []
+    link_page_ids = np.array([])
 
     def __init__(self,page_id):
 
@@ -39,4 +40,4 @@ class page():
                 row.append(0)
 
         #print len(row)
-        return row
+        return np.array(row)

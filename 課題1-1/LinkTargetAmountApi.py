@@ -2,11 +2,13 @@
 import MySQLdb
 import GetIdFromTitle
 
-#ローカルMySQLを使用
-connection = MySQLdb.connect(db = "wiki", user = "root")
-cursor = connection.cursor()
 
 def GetLinkTargetAmount(id):
+
+
+    #ローカルMySQLを使用
+    connection = MySQLdb.connect(db = "wiki", user = "root")
+    cursor = connection.cursor()
 
     cursor.execute("select * from pagelinks where pl_from=" + str(id) + " and pl_namespace=0")
     result = cursor.fetchall()
@@ -14,6 +16,11 @@ def GetLinkTargetAmount(id):
     return len(result)
 
 def GetLinkTargets(id):
+
+
+    #ローカルMySQLを使用
+    connection = MySQLdb.connect(db = "wiki", user = "root")
+    cursor = connection.cursor()
 
     cursor.execute("select * from pagelinks where pl_from=" + str(id) + " and pl_namespace=0")
     result = cursor.fetchall()

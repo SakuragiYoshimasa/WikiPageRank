@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import MySQLdb
 
-#ローカルMySQLを使用
-connection = MySQLdb.connect(db = "wiki", user = "root")
-cursor = connection.cursor()
+
 
 def GetLinkedPages(targetTitle):
+
+    #ローカルMySQLを使用
+    connection = MySQLdb.connect(db = "wiki", user = "root")
+    cursor = connection.cursor()
 
     if(targetTitle == ''):
         return []

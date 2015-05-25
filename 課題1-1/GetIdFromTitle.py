@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import MySQLdb
 
-#ローカルMySQLを使用
-connection = MySQLdb.connect(db = "wiki", user = "root")
-cursor = connection.cursor()
+
 
 def GetId(targetTitle):
 
+    #ローカルMySQLを使用
+    connection = MySQLdb.connect(db = "wiki", user = "root")
+    cursor = connection.cursor()
 
     #日本語のバイト文字のバックスラッシュと'対策
     targetTitle = targetTitle.replace('\\','\\\\')
