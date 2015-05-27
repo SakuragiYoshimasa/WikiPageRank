@@ -30,17 +30,17 @@ def calc():
     pool.map(writeMatrix, range(0,proc))
     #writeMatrix()
 
-    """#各行を単位ベクトルにしてから転置
+    #各行を単位ベクトルにしてから転置
     for i in range(0,size):
         outAllow = matrix[i].sum()
         matrix[i] = matrix[i] / float(outAllow)
         matrix = la.transpote(matrix)
-    """
+
     print "Finish"
     #print matrix
 
 def writeMatrix(process_number):
-    """
+    
     filename = "Matrix"+str(process_number)
     file = open(filename,'a+')
 
@@ -84,14 +84,14 @@ def writeMatrix(process_number):
         loop = loop + 1
 
     file.close()
-    """
 
 
 
 
 
 
-"""
+
+
 #From id , get title and put it pl_title and get linked ids list use for colum of the matrix
 #リンクを表現する行列の列を生成しノルムで格行を調整後転置
 def MakeMatrix(process_number):
@@ -140,11 +140,11 @@ def MakeMatrix(process_number):
 
     cursor.close()
     connection.close()
-"""
+
 
 
 #Fetch All ids spend about 23 second
-"""def FetchAllPageIds():
+def FetchAllPageIds():
     global allIDs
     connection = MySQLdb.connect(db = "wiki", user = "root")
     cursor = connection.cursor()
@@ -157,4 +157,4 @@ def MakeMatrix(process_number):
     connection.close()
 
     return allIDs
-"""
+
